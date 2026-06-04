@@ -469,16 +469,24 @@ export function useAppState() {
   // 更新状态（自动同步到 GitHub）
   const updateState = useCallback(
     async (updater: (prev: AppState) => AppState) => {
+      let newState: AppState | undefined;
+      
       setState(prev => {
-        const newState = updater(prev);
+        const updated = updater(prev);
+        newState = updated;
         // 保存到本地
-        saveLocalState(newState);
-        // 异步同步到 GitHub
-        if (newState.settings.githubConfig) {
-          syncToGitHub(newState);
-        }
-        return newState;
+        saveLocalState(updated);
+        return updated;
       });
+      
+      // 异步同步到 GitHub（在 setState 外部执行）
+      if (newState && newState.settings.githubConfig) {
+        try {
+          await syncToGitHub(newState);
+        } catch (error) {
+          console.error('GitHub 同步失败:', error);
+        }
+      }
     },
     [syncToGitHub]
   );
