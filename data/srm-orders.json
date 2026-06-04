@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "id": "id_1780537265087_hquuhu2h9",
+    "customer": "厚道数控",
+    "product": "SFC系列 800台",
+    "quantity": "800台",
+    "status": "交期协调中",
+    "priority": "P1",
+    "note": "已协调400台发出",
+    "lastChecked": "2026-06-04T01:41:05.069Z"
+  },
+  {
+    "id": "id_1780537265088_sw2072unr",
+    "customer": "青岛宝丽金",
+    "product": "SFC-050SA2 样品",
+    "quantity": "样品",
+    "status": "样品制作中",
+    "priority": "P0",
+    "note": "6月青岛机床展用",
+    "lastChecked": "2026-06-04T01:41:05.069Z"
+  },
+  {
+    "id": "id_1780537265089_6oer1cz36",
+    "customer": "广东捷程数控",
+    "product": "SFC系列 300个",
+    "quantity": "300个",
+    "status": "交期紧急",
+    "priority": "P0",
+    "note": "已下单4.2万元",
+    "lastChecked": "2026-06-04T01:41:05.069Z"
+  },
+  {
+    "id": "id_1780537265090_w5mw1p2qg",
+    "customer": "永银数控",
+    "product": "ALS-095ARN 6台",
+    "quantity": "6台",
+    "status": "正常推进",
+    "priority": "P1",
+    "note": "5/10已定",
+    "lastChecked": "2026-06-04T01:41:05.069Z"
+  },
+  {
+    "id": "id_1780537265091_khbv58k8k",
+    "customer": "无锡奥特维",
+    "product": "常规订单",
+    "quantity": "常规",
+    "status": "待监控",
+    "priority": "P2",
+    "note": "SRM系统定期确认",
+    "lastChecked": "2026-06-04T01:41:05.069Z"
+  }
+]
