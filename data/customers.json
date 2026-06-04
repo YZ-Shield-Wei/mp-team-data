@@ -1,0 +1,316 @@
+[
+  {
+    "id": "c1",
+    "name": "东莞匠运精密",
+    "region": "东莞",
+    "heatLevel": "high",
+    "score": 92,
+    "annualVolume": "80台",
+    "tags": [
+      "替换窗口期",
+      "待报价",
+      "样品测试中"
+    ],
+    "owner": "苏",
+    "nextAction": "确认ALS-040ARN报价",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c2",
+    "name": "东莞众鑫精密",
+    "region": "东莞",
+    "heatLevel": "high",
+    "score": 88,
+    "annualVolume": "100台",
+    "tags": [
+      "替换窗口期",
+      "待报价"
+    ],
+    "owner": "苏",
+    "nextAction": "发送ALS-055ARN报价单",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c3",
+    "name": "仕能机电",
+    "region": "东莞",
+    "heatLevel": "high",
+    "score": 85,
+    "annualVolume": "200台",
+    "tags": [
+      "替换窗口期",
+      "交期敏感"
+    ],
+    "owner": "苏",
+    "nextAction": "协调SFC-050交期",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c4",
+    "name": "广东炜度智能",
+    "region": "东莞",
+    "heatLevel": "high",
+    "score": 82,
+    "annualVolume": "300台",
+    "tags": [
+      "稳定合作",
+      "订单增长"
+    ],
+    "owner": "苏",
+    "nextAction": "确认6月订单量",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c5",
+    "name": "浙江芯晖",
+    "region": "浙江",
+    "heatLevel": "high",
+    "score": 80,
+    "annualVolume": "400台",
+    "tags": [
+      "半导体",
+      "日系偏好",
+      "订单增长"
+    ],
+    "owner": "苏",
+    "nextAction": "技术讲习会安排",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c6",
+    "name": "众佐（会通代理）",
+    "region": "东莞",
+    "heatLevel": "warm",
+    "score": 75,
+    "annualVolume": "1000台",
+    "tags": [
+      "订单增长",
+      "新能源",
+      "交期协调"
+    ],
+    "owner": "苏",
+    "nextAction": "协调交期排程",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c7",
+    "name": "奥茵绅智能",
+    "region": "苏州",
+    "heatLevel": "warm",
+    "score": 72,
+    "annualVolume": "100台",
+    "tags": [
+      "半导体",
+      "样品问题",
+      "大项目"
+    ],
+    "owner": "褚玮",
+    "nextAction": "确认样品测试结果",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c8",
+    "name": "青岛宝丽金",
+    "region": "青岛",
+    "heatLevel": "warm",
+    "score": 70,
+    "annualVolume": "200台",
+    "tags": [
+      "样品交付",
+      "展会",
+      "确度80%"
+    ],
+    "owner": "沈忆",
+    "nextAction": "6月青岛机床展样品确认",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c9",
+    "name": "广东捷程数控",
+    "region": "东莞",
+    "heatLevel": "warm",
+    "score": 68,
+    "annualVolume": "300台",
+    "tags": [
+      "交期冲突",
+      "已下单"
+    ],
+    "owner": "苏",
+    "nextAction": "协调已下单4.2万元交期",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c10",
+    "name": "浩达（会通代理）",
+    "region": "东莞",
+    "heatLevel": "warm",
+    "score": 65,
+    "annualVolume": "1000台",
+    "tags": [
+      "稳定客户",
+      "库存紧张",
+      "出口"
+    ],
+    "owner": "苏",
+    "nextAction": "确认库存状况",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c11",
+    "name": "苏州立岩机械",
+    "region": "苏州",
+    "heatLevel": "warm",
+    "score": 60,
+    "annualVolume": "300台",
+    "tags": [
+      "讲习会",
+      "订单火爆",
+      "交期延误风险"
+    ],
+    "owner": "褚玮",
+    "nextAction": "讲习会后续跟进",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c12",
+    "name": "浙江吉进",
+    "region": "浙江",
+    "heatLevel": "cold",
+    "score": 55,
+    "annualVolume": "50台",
+    "tags": [
+      "半导体",
+      "研发阶段",
+      "人事变动"
+    ],
+    "owner": "苏",
+    "nextAction": "8月跟进研发进展",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c13",
+    "name": "昆山泉懋机械",
+    "region": "昆山",
+    "heatLevel": "cold",
+    "score": 50,
+    "annualVolume": "待确认",
+    "tags": [
+      "待报价",
+      "待确认参数"
+    ],
+    "owner": "褚玮",
+    "nextAction": "确认技术参数",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c14",
+    "name": "苏州欧邦斯威",
+    "region": "苏州",
+    "heatLevel": "cold",
+    "score": 48,
+    "annualVolume": "待确认",
+    "tags": [
+      "待报价",
+      "待尺寸"
+    ],
+    "owner": "褚玮",
+    "nextAction": "确认尺寸规格",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c15",
+    "name": "厦门瑞美达",
+    "region": "厦门",
+    "heatLevel": "cold",
+    "score": 45,
+    "annualVolume": "待确认",
+    "tags": [
+      "待终端确认",
+      "定期跟进"
+    ],
+    "owner": "沈忆",
+    "nextAction": "等待终端客户确认",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c16",
+    "name": "山东精典数控",
+    "region": "山东",
+    "heatLevel": "sleeping",
+    "score": 38,
+    "annualVolume": "100台",
+    "tags": [
+      "价格敏感",
+      "待领导沟通"
+    ],
+    "owner": "沈忆",
+    "nextAction": "安排领导拜访",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c17",
+    "name": "东莞捷上匠德",
+    "region": "东莞",
+    "heatLevel": "sleeping",
+    "score": 35,
+    "annualVolume": "500台",
+    "tags": [
+      "短期难切入",
+      "利润率不足"
+    ],
+    "owner": "苏",
+    "nextAction": "评估长期价值",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  },
+  {
+    "id": "c18",
+    "name": "昆明精一机床",
+    "region": "昆明",
+    "heatLevel": "sleeping",
+    "score": 30,
+    "annualVolume": "100台",
+    "tags": [
+      "价格敏感",
+      "暂时对应难"
+    ],
+    "owner": "沈忆",
+    "nextAction": "季度回访",
+    "visitHistory": [],
+    "createdAt": "2026-06-04T08:56:20.704467",
+    "updatedAt": "2026-06-04T08:56:20.704467"
+  }
+]
