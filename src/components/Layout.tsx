@@ -28,6 +28,7 @@ interface Props {
   syncStatus: 'idle' | 'syncing' | 'success' | 'error';
   onConfigureGitHub: (config: GitHubConfig) => void;
   onSync: () => void;
+  roleSelector: React.ReactNode;
 }
 
 const navItems = [
@@ -47,6 +48,7 @@ export function Layout({
   syncStatus,
   onConfigureGitHub,
   onSync,
+  roleSelector,
 }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -105,6 +107,9 @@ export function Layout({
 
         {/* Bottom Actions */}
         <div className="p-3 border-t border-slate-100 space-y-2">
+          {/* Role Selector */}
+          <div className="px-2 py-1">{roleSelector}</div>
+
           {/* Sync Status */}
           <div className="flex items-center justify-between px-2 py-1.5 rounded-md bg-slate-50">
             <div className="flex items-center gap-2">
@@ -170,11 +175,13 @@ export function Layout({
             </>
           )}
 
-          {!githubConnected && (
-            <Badge variant="destructive" className="text-xs">
-              未连接 GitHub
-            </Badge>
-          )}
+          <div className="flex items-center gap-2">
+            {!githubConnected && (
+              <Badge variant="destructive" className="text-xs">
+                未连接 GitHub
+              </Badge>
+            )}
+          </div>
         </header>
 
         {/* Page Content */}

@@ -218,8 +218,68 @@ export interface GitHubFileResponse {
   path: string;
 }
 
+// 用户角色
+export type UserRole = 'master' | 'manager' | 'member';
+
+export interface RoleConfig {
+  role: UserRole;
+  owner: Owner;
+  label: string;
+}
+
+export const ROLE_CONFIG: Record<UserRole, { label: string; description: string }> = {
+  master: { label: '总控', description: '苏 - 全权限' },
+  manager: { label: '主管', description: '褚玮/沈忆 - 部门管理' },
+  member: { label: '成员', description: '王成/张璐/雷洪/杨尚达 - 执行' },
+};
+
 // 页面 Props
 export interface PageProps {
   data: AppState;
   updateData: (updater: (prev: AppState) => AppState) => Promise<void>;
+  roleConfig: RoleConfig;
+}
+
+// 权限检查工具
+export function canEditTodo(todo: TodoItem, role: UserRole, currentOwner: Owner): boolean {
+  if (role === 'master') return true;
+  return todo.owner === currentOwner;
+}
+
+export function canDeleteTodo(todo: TodoItem, role: UserRole, currentOwner: Owner): boolean {
+  if (role === 'master') return true;
+  return todo.owner === currentOwner;
+}
+
+export function canAssignOthers(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canEditCustomer(customer: Customer, role: UserRole, currentOwner: Owner): boolean {
+  if (role === 'master') return true;
+  return customer.owner === currentOwner;
+}
+
+export function canViewAllWeekly(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canModifySettings(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canPublishTask(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canViewAllTodos(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canExportTop5(role: UserRole): boolean {
+  return role === 'master';
+}
+
+export function canAccessWeeklyAnalysis(role: UserRole): boolean {
+  return role === 'master' || role === 'manager';
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Layout } from '@/components/Layout';
+import { RoleSelector } from '@/components/RoleSelector';
 import { P0TodoPanel } from '@/pages/P0TodoPanel';
 import { P1QuoteCalculator } from '@/pages/P1QuoteCalculator';
 import { P2CustomerRadar } from '@/pages/P2CustomerRadar';
@@ -9,10 +10,26 @@ import { P5RouteOptimizer } from '@/pages/P5RouteOptimizer';
 import { useAppState } from '@/hooks/useAppState';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
-import type { GitHubConfig } from '@/types';
+import type { GitHubConfig, RoleConfig } from '@/types';
+
+const ROLE_STORAGE_KEY = 'mp_team_suite_role';
+
+function loadRoleConfig(): RoleConfig | null {
+  try {
+    const data = localStorage.getItem(ROLE_STORAGE_KEY);
+    return data ? JSON.parse(data) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveRoleConfig(config: RoleConfig) {
+  localStorage.setItem(ROLE_STORAGE_KEY, JSON.stringify(config));
+}
 
 function App() {
   const [currentPage, setCurrentPage] = useState('p0');
+  const [roleConfig, setRoleConfig] = useState<RoleConfig | null>(loadRoleConfig);
   const { state, updateState, githubConnected, syncStatus, syncFromGitHub, configureGitHub } =
     useAppState();
 
@@ -45,10 +62,29 @@ function App() {
     }
   };
 
+  const handleRoleSelect = (config: RoleConfig) => {
+    setRoleConfig(config);
+    saveRoleConfig(config);
+    toast.success(`身份已设置为：${config.label}`);
+  };
+
   const renderPage = () => {
+    // 如果没选角色，显示角色选择
+    if (!roleConfig) {
+      return (
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center text-slate-400">
+            <p className="text-lg mb-2">请先选择你的身份</p>
+            <p className="text-sm">点击左上角的角色按钮</p>
+          </div>
+        </div>
+      );
+    }
+
     const props = {
       data: state,
       updateData: updateState,
+      roleConfig,
     };
 
     switch (currentPage) {
@@ -78,6 +114,9 @@ function App() {
         syncStatus={syncStatus}
         onConfigureGitHub={handleConfigureGitHub}
         onSync={handleSync}
+        roleSelector={
+          <RoleSelector onSelect={handleRoleSelect} currentConfig={roleConfig} />
+        }
       >
         {renderPage()}
       </Layout>

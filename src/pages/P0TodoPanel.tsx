@@ -32,17 +32,13 @@ import {
   CheckCircle2,
   X,
 } from 'lucide-react';
-import type { AppState, TodoItem, Owner, Priority } from '@/types';
-import { OWNERS } from '@/types';
+import type { TodoItem, Owner, Priority, PageProps } from '@/types';
+import { OWNERS, canAssignOthers, canDeleteTodo, canViewAllTodos, canExportTop5 } from '@/types';
 import { calculateTodoStatus, getTimeRemaining, formatDate } from '@/utils/local-storage';
 import { cn } from '@/lib/utils';
 
-interface Props {
-  data: AppState;
-  updateData: (updater: (prev: AppState) => AppState) => Promise<void>;
-}
-
-export function P0TodoPanel({ data, updateData }: Props) {
+export function P0TodoPanel({ data, updateData, roleConfig }: PageProps) {
+  const { role, owner: currentOwner } = roleConfig;
   const [searchTerm, setSearchTerm] = useState('');
   const [filterOwner, setFilterOwner] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
@@ -53,9 +49,15 @@ export function P0TodoPanel({ data, updateData }: Props) {
   // 新待办表单
   const [newTodo, setNewTodo] = useState<Partial<TodoItem>>({
     priority: 'P1',
-    owner: '苏',
+    owner: currentOwner,
     deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   });
+
+  // 可分配的负责人列表
+  const assignableOwners = useMemo(() => {
+    if (canAssignOthers(role)) return OWNERS;
+    return [currentOwner] as Owner[];
+  }, [role, currentOwner]);
 
   // 计算统计数据
   const stats = useMemo(() => {
@@ -69,9 +71,15 @@ export function P0TodoPanel({ data, updateData }: Props) {
     };
   }, [data.todos]);
 
+  // 根据角色过滤可见待办
+  const visibleTodos = useMemo(() => {
+    if (canViewAllTodos(role)) return data.todos;
+    return data.todos.filter(t => t.owner === currentOwner);
+  }, [data.todos, role, currentOwner]);
+
   // 筛选和排序待办
   const filteredTodos = useMemo(() => {
-    let todos = [...data.todos];
+    let todos = [...visibleTodos];
 
     // 搜索过滤
     if (searchTerm) {
@@ -84,7 +92,7 @@ export function P0TodoPanel({ data, updateData }: Props) {
       );
     }
 
-    // 负责人过滤
+    // 负责人过滤（仅Master可见全部）
     if (filterOwner !== 'all') {
       todos = todos.filter(t => t.owner === filterOwner);
     }
@@ -105,7 +113,7 @@ export function P0TodoPanel({ data, updateData }: Props) {
 
   // Top5 待办
   const top5Todos = useMemo(() => {
-    return [...data.todos]
+    return [...visibleTodos]
       .filter(t => calculateTodoStatus(t.deadline) !== 'normal')
       .sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime())
       .slice(0, 5);
@@ -257,8 +265,10 @@ export function P0TodoPanel({ data, updateData }: Props) {
                 <SelectValue placeholder="全部负责人" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">全部负责人</SelectItem>
-                {OWNERS.map(o => (
+                <SelectItem value="all">
+                  {canViewAllTodos(role) ? '全部负责人' : currentOwner}
+                </SelectItem>
+                {(canViewAllTodos(role) ? OWNERS : [currentOwner]).map(o => (
                   <SelectItem key={o} value={o}>
                     {o}
                   </SelectItem>
@@ -291,10 +301,12 @@ export function P0TodoPanel({ data, updateData }: Props) {
               </SelectContent>
             </Select>
 
-            <Button variant="outline" size="sm" onClick={exportTop5}>
-              <Download className="w-4 h-4 mr-1" />
-              Top5
-            </Button>
+            {canExportTop5(role) && (
+              <Button variant="outline" size="sm" onClick={exportTop5}>
+                <Download className="w-4 h-4 mr-1" />
+                Top5
+              </Button>
+            )}
 
             <Dialog open={showAddDialog} onOpenChange={setShowAddDialog}>
               <DialogTrigger asChild>
@@ -340,7 +352,7 @@ export function P0TodoPanel({ data, updateData }: Props) {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {OWNERS.map(o => (
+                          {assignableOwners.map(o => (
                             <SelectItem key={o} value={o}>
                               {o}
                             </SelectItem>
@@ -490,14 +502,16 @@ export function P0TodoPanel({ data, updateData }: Props) {
                           </Badge>
                         </td>
                         <td className="px-4 py-2.5">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-7 w-7 p-0 text-slate-400 hover:text-red-500"
-                            onClick={() => handleDeleteTodo(todo.id)}
-                          >
-                            <X className="w-3.5 h-3.5" />
-                          </Button>
+                          {canDeleteTodo(todo, role, currentOwner) && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-7 w-7 p-0 text-slate-400 hover:text-red-500"
+                              onClick={() => handleDeleteTodo(todo.id)}
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </Button>
+                          )}
                         </td>
                       </tr>
                     );
