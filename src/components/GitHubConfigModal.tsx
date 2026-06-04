@@ -18,12 +18,17 @@ interface Props {
   connected: boolean;
 }
 
+// 默认团队仓库配置（共享数据源）
+const DEFAULT_OWNER = 'YZ-Shield-Wei';
+const DEFAULT_REPO = 'mp-team-data';
+const DEFAULT_BRANCH = 'main';
+
 export function GitHubConfigModal({ onSave, connected }: Props) {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState('');
-  const [owner, setOwner] = useState('');
-  const [repo, setRepo] = useState('');
-  const [branch, setBranch] = useState('main');
+  const [owner, setOwner] = useState(DEFAULT_OWNER);
+  const [repo, setRepo] = useState(DEFAULT_REPO);
+  const [branch, setBranch] = useState(DEFAULT_BRANCH);
   const [testing, setTesting] = useState(false);
   const [error, setError] = useState('');
 
@@ -78,7 +83,7 @@ export function GitHubConfigModal({ onSave, connected }: Props) {
         <DialogHeader>
           <DialogTitle>配置 GitHub 数据同步</DialogTitle>
           <DialogDescription>
-            请输入 GitHub 个人访问令牌（PAT）和仓库信息，用于团队数据同步。
+            输入你的 GitHub Token 即可连接团队共享数据仓库。仓库地址已预填，无需修改。
           </DialogDescription>
         </DialogHeader>
 
@@ -89,9 +94,26 @@ export function GitHubConfigModal({ onSave, connected }: Props) {
             </div>
           )}
 
+          {/* 团队仓库信息（只读展示） */}
+          <div className="rounded-md bg-slate-50 p-3 space-y-2">
+            <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">团队共享仓库</div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-slate-400">Owner:</span>
+              <span className="font-medium text-slate-700">{DEFAULT_OWNER}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-slate-400">Repo:</span>
+              <span className="font-medium text-slate-700">{DEFAULT_REPO}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-slate-400">Branch:</span>
+              <span className="font-medium text-slate-700">{DEFAULT_BRANCH}</span>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="token">
-              GitHub Personal Access Token
+              你的 GitHub Personal Access Token
               <span className="text-red-500"> *</span>
             </Label>
             <Input
@@ -103,45 +125,39 @@ export function GitHubConfigModal({ onSave, connected }: Props) {
             />
             <p className="text-xs text-muted-foreground">
               在 GitHub Settings → Developer settings → Personal access tokens 中生成，需勾选
-              repo 权限
+              repo 权限。向苏申请团队 Token。
             </p>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="owner">
-              仓库所有者（Owner）
-              <span className="text-red-500"> *</span>
-            </Label>
-            <Input
-              id="owner"
-              placeholder="例如: your-username"
-              value={owner}
-              onChange={e => setOwner(e.target.value)}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="repo">
-              仓库名称（Repository）
-              <span className="text-red-500"> *</span>
-            </Label>
-            <Input
-              id="repo"
-              placeholder="例如: mp-team-data"
-              value={repo}
-              onChange={e => setRepo(e.target.value)}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="branch">分支名称（Branch）</Label>
-            <Input
-              id="branch"
-              placeholder="main"
-              value={branch}
-              onChange={e => setBranch(e.target.value)}
-            />
-          </div>
+          {/* 高级设置（默认折叠） */}
+          <details className="text-xs">
+            <summary className="cursor-pointer text-slate-400 hover:text-slate-600">
+              高级：修改仓库地址（一般不需要）
+            </summary>
+            <div className="mt-2 space-y-2">
+              <Input
+                id="owner"
+                placeholder="Owner"
+                value={owner}
+                onChange={e => setOwner(e.target.value)}
+                className="text-xs"
+              />
+              <Input
+                id="repo"
+                placeholder="Repository"
+                value={repo}
+                onChange={e => setRepo(e.target.value)}
+                className="text-xs"
+              />
+              <Input
+                id="branch"
+                placeholder="Branch"
+                value={branch}
+                onChange={e => setBranch(e.target.value)}
+                className="text-xs"
+              />
+            </div>
+          </details>
 
           {error && (
             <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</div>
