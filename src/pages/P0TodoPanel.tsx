@@ -143,7 +143,7 @@ export function P0TodoPanel({ data, updateData, roleConfig }: PageProps) {
 
     setNewTodo({
       priority: 'P1',
-      owner: '苏',
+      owner: currentOwner,
       deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     });
     setShowAddDialog(false);
